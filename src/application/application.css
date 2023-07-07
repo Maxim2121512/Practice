@@ -1,0 +1,94 @@
+.button {
+	-fx-font-family: "Arial";
+    -fx-background-color: #4CAF50; 
+    -fx-text-fill: black;
+    -fx-font-size: 14px; 
+    -fx-border-radius: 10px;
+    -fx-border-color: red;
+    -fx-border-width: 1px;
+    -fx-background-radius: 10px;
+
+}
+
+.button .text{
+	-fx-font-family: "Arial";
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);
+}
+
+.button:hover{
+	-fx-font-family: "Arial";
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); 
+}
+
+.text-field {
+	-fx-font-family: "Arial";
+	-fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+    -fx-padding: 5px;
+    
+}
+
+.prompt-text{
+	-fx-text-fill: red;
+}
+
+.menu-button {
+	-fx-font-family: "Arial";
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-color: red;
+}
+
+.menu-button:hover {
+	-fx-font-family: "Arial";
+    -fx-background-color: #388E3C;
+}
+
+.menu-button:pressed {
+	-fx-font-family: "Arial";
+    -fx-background-color: #2E7D32;
+}
+
+.menu-item {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: black;
+    -fx-padding: 5px 10px;
+}
+
+.menu-item:hover, 
+.menu-item:selected {
+    -fx-background-color: #4CAF50; 
+}
+
+
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);
+}
+
+#mainLabel{
+	-fx-font-family: "Arial";
+	-fx-font-size: 25px;
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);
+}
+
+#fieldPane{
+	-fx-background-color:  #103275;
+}
+
+#pane{
+	-fx-background-color:  #f2e2b8;
+}
+
+#scrollPane{
+	-fx-background: #103275;
+	-fx-background-color: red;
+}
