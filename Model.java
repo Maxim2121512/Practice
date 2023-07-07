@@ -110,7 +110,7 @@ public class Model {
         }
     }
 
-    public List<Cell> runAStar(Heuruistics heuristicType) {
+    public Cell runAStarStep(Heuruistics heuristicType) {
         // Проверка наличия стартовой и конечной клеток
         if (startCell == null || goalCell == null) {
             throw new IllegalStateException("Start cell or goal cell is not set.");
@@ -124,56 +124,47 @@ public class Model {
             Arrays.fill(costMap[i], Integer.MAX_VALUE);
         }
 
-        // Создание карты для хранения предшествующей клетки для каждой клетки
-        Cell[][] previousCellMap = new Cell[grid.length][grid[0].length];
-
         // Создание очереди с приоритетом для хранения клеток
-        PriorityQueue<Cell> queue = new PriorityQueue<>((a, b) -> {
-            int priorityA = costMap[a.getY()][a.getX()] + calculateHeuristic(a, heuristicType);
-            int priorityB = costMap[b.getY()][b.getX()] + calculateHeuristic(b, heuristicType);
-            return Integer.compare(priorityA, priorityB);
-        });
+        PriorityQueue<Cell> queue = new PriorityQueue<>((a, b) -> Integer.compare(costMap[a.getY()][a.getX()], costMap[b.getY()][b.getX()]));
 
         // Установка стартовой клетки и ее стоимости пути равной 0
         costMap[startCell.getY()][startCell.getX()] = 0;
         queue.offer(startCell);
 
         while (!queue.isEmpty()) {
+            // Извлечение клетки с наименьшей стоимостью пути из очереди
             Cell currentCell = queue.poll();
 
+            // Проверка, достигли ли мы конечной клетки
             if (currentCell.equals(goalCell)) {
-                return reconstructPath(previousCellMap, currentCell); // Возвращаем путь в виде массива клеток
+                return currentCell; // Возвращаем найденную конечную клетку
             }
 
+            // Обработка соседних клеток
             List<Cell> neighbors = currentCell.getNeighbors();
             for (Cell neighbor : neighbors) {
-                int newCost = costMap[currentCell.getY()][currentCell.getX()] + 1;
+                // Проверка, является ли клетка проходимой
+                if (neighbor.getType() != CellType.BLOCKED) {
+                    // Вычисление новой стоимости пути до соседней клетки
+                    int newCost = costMap[currentCell.getY()][currentCell.getX()] + 1;
 
-                if (newCost < costMap[neighbor.getY()][neighbor.getX()]) {
-                    costMap[neighbor.getY()][neighbor.getX()] = newCost;
-                    previousCellMap[neighbor.getY()][neighbor.getX()] = currentCell;
+                    // Если новая стоимость пути меньше текущей стоимости пути до соседней клетки, обновляем стоимость и добавляем ее в очередь
+                    if (newCost < costMap[neighbor.getY()][neighbor.getX()]) {
+                        costMap[neighbor.getY()][neighbor.getX()] = newCost;
 
-                    // Обновление приоритета соседней клетки и ее добавление в очередь с приоритетом
-                    if (queue.contains(neighbor)) {
-                        queue.remove(neighbor);
+                        // Вычисление эвристической оценки для соседней клетки
+                        int heuristic = calculateHeuristic(neighbor, heuristicType);
+
+                        // Обновление предыдущей клетки для соседней клетки (в данном случае не используется)
+
+                        // Добавление соседней клетки в очередь с приоритетом
+                        queue.offer(neighbor);
                     }
-                    queue.offer(neighbor);
                 }
             }
         }
 
         return null; // Возвращаем null, если путь не найден
-    }
-
-    // Восстановление пути из предшествующих клеток
-    private List<Cell> reconstructPath(Cell[][] previousCellMap, Cell currentCell) {
-        List<Cell> path = new ArrayList<>();
-        while (currentCell != null) {
-            path.add(currentCell);
-            currentCell = previousCellMap[currentCell.getY()][currentCell.getX()];
-        }
-        Collections.reverse(path);
-        return path;
     }
 
     // Вычисление эвристической оценки для клетки в зависимости от выбранного типа эвристики
@@ -189,10 +180,10 @@ public class Model {
             case DIAGONALDISTANCE:
                 return Math.max(dx, dy);
             default:
-                throw new IllegalArgumentException("Invalid heuristic type.");
+                return 0;
         }
     }
-    
+
     public void clear() {
         // Очистка массива клеток
         for (int i = 0; i < grid.length; i++) {
