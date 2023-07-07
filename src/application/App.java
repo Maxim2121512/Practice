@@ -21,10 +21,10 @@ public class App extends Application {
 			
 			
 			primaryStage.setResizable(false);
-		    primaryStage.setScene(scene);
-		    primaryStage.setTitle("A* Visualisator");
-		    primaryStage.getIcons().add(icon);
-		    primaryStage.show();
+		    	primaryStage.setScene(scene);
+		    	primaryStage.setTitle("A* Visualisator");
+		    	primaryStage.getIcons().add(icon);
+		    	primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
