@@ -111,11 +111,6 @@ public class Model {
     }
 
     public Cell runAStarStep(Heuruistics heuristicType) {
-        // Проверка наличия стартовой и конечной клеток
-        if (startCell == null || goalCell == null) {
-            throw new IllegalStateException("Start cell or goal cell is not set.");
-        }
-
         // Создание карты для хранения стоимости пути до каждой клетки
         int[][] costMap = new int[grid.length][grid[0].length];
 
@@ -130,8 +125,13 @@ public class Model {
         // Установка стартовой клетки и ее стоимости пути равной 0
         costMap[startCell.getY()][startCell.getX()] = 0;
         queue.offer(startCell);
-
-        while (!queue.isEmpty()) {
+        Cell find_cell = run_algorithm(queue, costMap);
+        
+        return find_cell; // Возвращаем null, если путь не найден
+    }
+    
+    public Cell run_algorithm(PriorityQueue<Cell> queue, int[][] costMap){
+        if (!queue.isEmpty()) {
             // Извлечение клетки с наименьшей стоимостью пути из очереди
             Cell currentCell = queue.poll();
 
@@ -154,19 +154,16 @@ public class Model {
 
                         // Вычисление эвристической оценки для соседней клетки
                         int heuristic = calculateHeuristic(neighbor, heuristicType);
-
-                        // Обновление предыдущей клетки для соседней клетки (в данном случае не используется)
-
                         // Добавление соседней клетки в очередь с приоритетом
                         queue.offer(neighbor);
                     }
                 }
             }
+            return currentCell;
         }
-
-        return null; // Возвращаем null, если путь не найден
+        return null;
     }
-
+    
     // Вычисление эвристической оценки для клетки в зависимости от выбранного типа эвристики
     private int calculateHeuristic(Cell cell, Heuruistics heuristicType) {
         int dx = Math.abs(cell.getX() - goalCell.getX());
