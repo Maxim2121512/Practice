@@ -1,0 +1,7 @@
+package Enums;
+
+public enum Heuruistics {
+	EUCLIDIANDISTANCE,
+	MANHATTANDISTANCE,
+	DIAGONALDISTANCE
+}
