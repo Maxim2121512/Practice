@@ -13,7 +13,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {	
-			Parent root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
 			Scene scene = new Scene(root,1280,800);
 			Image icon = new Image(getClass().getResourceAsStream("Title.png"));
 			String cssPath = "application.css";
