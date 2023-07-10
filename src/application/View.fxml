@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Label fx:id="mainLabel" alignment="CENTER" layoutX="946.0" layoutY="10.0" prefHeight="46.0" prefWidth="178.0" stylesheets="@application.css" text="A* Visualisator" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="800.0" layoutY="60.0" prefHeight="27.0" prefWidth="178.0" stylesheets="@application.css" text="1. Initialize field size">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="setFieldSizeButton" layoutX="1080.0" layoutY="100.0" mnemonicParsing="false" stylesheets="@application.css" text="Ok" />
+      <TextField fx:id="numberOfColumnsText" alignment="TOP_LEFT" layoutX="940.0" layoutY="100.0" prefHeight="25.0" prefWidth="120.0" promptText="Number of columns" stylesheets="@application.css" />
+      <Label layoutX="800.0" layoutY="140.0" prefHeight="27.0" prefWidth="215.0" stylesheets="@application.css" text="2. Select start and end cell" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="startCellRowIdxText" layoutX="890.0" layoutY="180.0" prefHeight="25.0" prefWidth="124.0" promptText="x-coordinate" stylesheets="@application.css" />
+      <TextField fx:id="startCellColIdxText" layoutX="1034.0" layoutY="180.0" prefHeight="25.0" prefWidth="124.0" promptText="y-coordinate" stylesheets="@application.css" />
+      <TextField fx:id="endCellRowIdxText" layoutX="890.0" layoutY="220.0" prefHeight="25.0" prefWidth="124.0" promptText="x-coordinate" stylesheets="@application.css" />
+      <TextField fx:id="endCellColIdxText" layoutX="1034.0" layoutY="220.0" prefHeight="25.0" prefWidth="124.0" promptText="y-coordinate" stylesheets="@application.css" />
+      <Label layoutX="820.0" layoutY="180.0" prefHeight="27.0" prefWidth="40.0" stylesheets="@application.css" text="Start">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="820.0" layoutY="220.0" prefHeight="27.0" prefWidth="30.0" stylesheets="@application.css" text="End">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="setStartCellButton" layoutX="1178.0" layoutY="180.0" mnemonicParsing="false" stylesheets="@application.css" text="Ok" />
+      <Label layoutX="800.0" layoutY="267.0" prefHeight="27.0" prefWidth="140.0" stylesheets="@application.css" text="3. Select heuristic" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <MenuButton fx:id="setHeuristicButton" layoutX="960.0" layoutY="260.0" mnemonicParsing="false" stylesheets="@application.css" text="Click to choose">
+        <items>
+          <MenuItem fx:id="euclidianDistanceItem" mnemonicParsing="false" text="Euclidean distance" />
+          <MenuItem fx:id="manhattanDistanceItem" mnemonicParsing="false" text="Manhattan distance" />
+            <MenuItem fx:id="diagonalDistanceItem" mnemonicParsing="false" text="Diagonal distance" />
+        </items>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </MenuButton>
+      <Button fx:id="completeOneStepAlgButton" layoutX="826.0" layoutY="352.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="190.0" stylesheets="@application.css" text="Complete 1 step">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="800.0" layoutY="312.0" prefHeight="27.0" prefWidth="215.0" stylesheets="@application.css" text="4. Run the algorithm!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="executeCompletelyButton" layoutX="1052.0" layoutY="352.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="190.0" stylesheets="@application.css" text="Execute completely">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveFieldToFileButton" layoutX="807.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="133.0" stylesheets="@application.css" text="Save Field ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="extractFieldFromFile" layoutX="967.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="133.0" stylesheets="@application.css" text="Extract Field">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" prefHeight="780.0" prefWidth="783.0" style="-fx-background-color: red;" stylesheets="@application.css" vbarPolicy="NEVER">
+         <content>
+            <Pane fx:id="fieldPane" prefHeight="780.0" prefWidth="780.0" stylesheets="@application.css" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="setEndCellButton" layoutX="1178.0" layoutY="220.0" mnemonicParsing="false" stylesheets="@application.css" text="Ok" />
+      <Label layoutX="1010.0" layoutY="407.0" prefHeight="46.0" prefWidth="50.0" stylesheets="@application.css" text="Other">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="startOverButton" layoutX="1120.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="133.0" stylesheets="@application.css" text="Start over" />
+      <Button fx:id="setStandartScaleButton" layoutX="807.0" layoutY="710.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="168.0" styleClass="submit-button" stylesheets="@application.css" text="return to standard scale">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="numberOfRowsText" alignment="TOP_LEFT" layoutX="800.0" layoutY="100.0" prefHeight="25.0" prefWidth="120.0" promptText="Number of rows" stylesheets="@application.css" />
+   </children>
+</Pane>
